@@ -444,7 +444,7 @@ function openArtist(name){
      c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:'',
      web?`<a href="${esc(web)}" target="_blank" rel="noopener">${esc(c.web)}</a>`:''].filter(Boolean).join(' · ');
    return `<div class="cline">${parts||'—'}</div>`;}).join('')}</div>`:'';
- const ext=ARTLINKS[name]?`<p class="alink-ext"><a href="${esc(ARTLINKS[name])}" target="_blank" rel="noopener">${esc(ARTLINKS[name].replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,''))} ↗</a></p>`:'';
+ const ext=ARTLINKS[name]?`<p class="alink-ext"><a href="${esc(ARTLINKS[name])}" target="_blank" rel="noopener">${esc(ARTLINKS[name])} ↗</a></p>`:'';
  $('#sheet').innerHTML=`<button class="x" id="mx">✕</button><p class="ahdr">Artist</p><h2>${esc(name)}</h2>
   <p class="acount">${ws.length} work${ws.length==1?'':'s'} screened at Antimatter${ctys.length?' · '+ctys.map(c=>`<a class="alink" data-country="${esc(c)}">${esc(c)}</a>`).join(', '):''}</p>
   ${ext}${cprof}
@@ -517,7 +517,7 @@ function renderArtists(){
  a=a.slice().sort(sort==='name'?(x,y)=>x.name.localeCompare(y.name):(x,y)=>y.count-x.count||x.name.localeCompare(y.name));
  $('#acount').textContent=`${a.length.toLocaleString()} artist${a.length==1?'':'s'}`;
  $('#artistlist').innerHTML=a.map((x,i)=>`<div class="arow"><span class="arank">${sort==='name'?'':(i+1)}</span>`
-  +`<a class="alink aname" data-artist="${esc(x.name)}">${esc(x.name)}</a>${ARTLINKS[x.name]?' <a class="extdot" href="'+esc(ARTLINKS[x.name])+'" target="_blank" rel="noopener" title="External link">↗</a>':''}`
+  +`<a class="alink aname" data-artist="${esc(x.name)}">${esc(x.name)}</a>`
   +`<span class="actry">${esc([...x.cts].slice(0,3).join(', '))}</span>`
   +`<span class="aspan">${x.emin===x.emax?x.emin:x.emin+'–'+x.emax}</span>`
   +`<span class="acnt">${x.count}</span></div>`).join('');
